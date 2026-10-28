@@ -1,3 +1,6 @@
 google-genai
 python-dotenv
 Flask
+streamlit
+langchain-huggingface
+langchain-google-genai
