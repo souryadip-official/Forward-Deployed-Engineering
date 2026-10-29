@@ -1,0 +1,20 @@
+{
+  "query": "My order is showing dispatched for over a month now and have not arrived yet. I am frustrated with the service.",
+  "api_key": "xxxxxxxxxx"
+}
+
+{
+  "content": "I understand your frustration. Your order showing dispatched for over a month and not arriving yet falls under order tracking status. I can help you with this.\n\nCould you please provide your order number so I can check the details for you?"
+}
+
+=====================================================================
+=====================================================================
+
+{
+  "query": "Can you explain me docker and kubernetes in 2 lines each.",
+  "api_key": "xxxxxxxxxx"
+}
+
+{
+  "content": "I am not aware of the answer."
+}
