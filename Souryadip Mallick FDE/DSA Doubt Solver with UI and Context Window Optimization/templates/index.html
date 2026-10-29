@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f1">
+  <title>AlgoMentor - DSA Doubt Solver</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 5h14v14H5z"/><path d="M9 9h6M9 13h4"/></svg>
+        </div>
+        <span>AlgoMentor</span>
+      </div>
+
+      <button class="new-chat" id="newChat">
+        <span>+</span> New doubt
+      </button>
+
+      <div class="history-label">TODAY</div>
+      <button class="history-item active" id="currentChat">
+        <span class="history-dot"></span>
+        <span>DSA Doubt Solver</span>
+      </button>
+
+      <div class="context-card">
+        <div class="context-heading">
+          <span>Context memory</span>
+          <span class="live-pill">LIVE</span>
+        </div>
+        <div class="context-track"><div id="contextBar"></div></div>
+        <div class="context-meta">
+          <span><strong id="turnCount">0</strong> messages</span>
+          <span>20 turn limit</span>
+        </div>
+      </div>
+
+      <button class="key-button" id="keyButton">
+        <svg viewBox="0 0 24 24"><path d="M15 7a4 4 0 1 1-3 3.87L5 18v3h4l1-2h3l-1-3 2-2a4 4 0 0 1 1 .13A4 4 0 0 1 15 7Z"/></svg>
+        <span>API settings</span>
+        <span class="status-dot" id="keyStatus"></span>
+      </button>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <button class="icon-button menu-button" id="menuButton" aria-label="Open menu">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <div>
+          <h1>DSA Doubt Solver</h1>
+          <p><span></span> Tutor online</p>
+        </div>
+        <button class="icon-button" id="clearButton" title="Clear conversation" aria-label="Clear conversation">
+          <svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"/></svg>
+        </button>
+      </header>
+
+      <section class="chat-area" id="chatArea">
+        <div class="welcome" id="welcome">
+          <div class="welcome-icon">
+            <svg viewBox="0 0 48 48"><path d="M9 9h30v30H9z"/><path d="M16 17h16M16 24h10M16 31h13"/><circle cx="35" cy="35" r="7" class="bubble"/></svg>
+          </div>
+          <div>
+            <span class="eyebrow">YOUR DSA TUTOR</span>
+            <h2>What are we solving today?</h2>
+            <p>Ask a doubt, walk through an approach, or paste a problem. I’ll keep the explanation clear and conversational.</p>
+          </div>
+        </div>
+
+        <div class="suggestions" id="suggestions">
+          <button data-prompt="Explain the binary search algorithm with its time complexity and a dry run.">
+            <span class="prompt-icon orange">01</span>
+            <strong>Explain a concept</strong>
+            <small>Binary search</small>
+          </button>
+          <button data-prompt="I’m trying to solve a problem using two pointers. Help me understand when and why to use it.">
+            <span class="prompt-icon blue">02</span>
+            <strong>Choose an approach</strong>
+            <small>Two pointers</small>
+          </button>
+          <button data-prompt="Help me debug my code and find the logical error.">
+            <span class="prompt-icon green">&lt;/&gt;</span>
+            <strong>Debug my code</strong>
+            <small>Find the bug</small>
+          </button>
+        </div>
+
+        <div class="messages" id="messages" aria-live="polite"></div>
+      </section>
+
+      <footer class="composer-wrap">
+        <form class="composer" id="chatForm">
+          <textarea id="question" rows="1" maxlength="4000" placeholder="Ask a DSA question..." aria-label="Ask a DSA question"></textarea>
+          <button class="send-button" id="sendButton" type="submit" aria-label="Send message">
+            <svg viewBox="0 0 24 24"><path d="m5 12 14-7-4 14-3-6-7-1Z"/><path d="m12 13 7-8"/></svg>
+          </button>
+        </form>
+        <div class="composer-note">
+          <span>AI tutor can make mistakes. Verify important solutions.</span>
+          <span><kbd>Enter</kbd> send · <kbd>Shift</kbd> + <kbd>Enter</kbd> new line</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="keyModal" role="dialog" aria-modal="true" aria-labelledby="keyTitle">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      <div class="modal-icon">
+        <svg viewBox="0 0 24 24"><path d="M15 7a4 4 0 1 1-3 3.87L5 18v3h4l1-2h3l-1-3 2-2a4 4 0 0 1 1 .13A4 4 0 0 1 15 7Z"/></svg>
+      </div>
+      <h3 id="keyTitle">Connect Gemini</h3>
+      <p>Your Google AI API key is stored only in this browser and sent with each question.</p>
+      <label for="apiKey">Google AI API key</label>
+      <div class="key-field">
+        <input id="apiKey" type="password" autocomplete="off" placeholder="AIza...">
+        <button id="toggleKey" type="button">Show</button>
+      </div>
+      <button class="save-key" id="saveKey">Save &amp; continue</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
