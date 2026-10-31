@@ -1,0 +1,43 @@
+{
+  "query": "Please calculate 567 mod 24",
+  "api_key": "xxxxxxxxxxx"
+}
+
+{
+  "content": "The result of 567 mod 24 is 15.",
+  "tool_calls": [
+    {
+      "args": {
+        "a": 567,
+        "b": 24,
+        "operation": "mod"
+      },
+      "id": "60194c25-9b9b-4ccd-9ba0-4e29ee1b5ecd",
+      "name": "invoke_calculate",
+      "type": "tool_call"
+    }
+  ]
+}
+
+=====================================================================
+=====================================================================
+
+{
+  "query": "What is the current INR to BDT rate?",
+  "api_key": "xxxxxxxxxxx"
+}
+
+{
+  "content": "The current exchange rate is 1 INR = 1.3028 BDT.",
+  "tool_calls": [
+    {
+      "args": {
+        "base": "INR",
+        "target": "BDT"
+      },
+      "id": "f22f88a0-6af1-43e3-b923-26271757764d",
+      "name": "invoke_exchange_rate",
+      "type": "tool_call"
+    }
+  ]
+}

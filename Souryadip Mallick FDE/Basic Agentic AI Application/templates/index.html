@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orbit Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"><span></span></div>
+        <div>
+          <strong>Orbit</strong>
+          <small>Agent workspace</small>
+        </div>
+      </div>
+
+      <button class="new-chat" id="newChat" type="button">
+        <span class="plus">+</span>
+        New conversation
+      </button>
+
+      <nav class="nav-block" aria-label="Recent conversations">
+        <p class="nav-label">Today</p>
+        <button class="nav-item active" type="button">
+          <span class="status-dot"></span>
+          <span class="nav-text">Agent workspace</span>
+          <span class="nav-meta">Now</span>
+        </button>
+      </nav>
+
+      <section class="tools-section">
+        <p class="nav-label">Available tools</p>
+        <div class="tool-list">
+          <div class="tool-chip"><span class="tool-icon calculator-icon">÷</span><span>Calculator</span></div>
+          <div class="tool-chip"><span class="tool-icon weather-icon">◉</span><span>Weather</span></div>
+          <div class="tool-chip"><span class="tool-icon exchange-icon">↔</span><span>Exchange rate</span></div>
+        </div>
+      </section>
+
+      <button class="settings-button" id="settingsButton" type="button">
+        <span>⚙</span>
+        <span>API settings</span>
+        <span class="key-status" id="keyStatus">Not set</span>
+      </button>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Personal agent</p>
+          <h1>Agent workspace</h1>
+        </div>
+        <div class="live-status"><span></span> Ready</div>
+      </header>
+
+      <div class="chat-scroll" id="chatScroll">
+        <section class="conversation" id="conversation" aria-live="polite">
+          <article class="welcome">
+            <div class="welcome-orb">
+              <div class="orb-core"></div>
+            </div>
+            <p class="welcome-kicker">What can I help you explore?</p>
+            <h2>I can calculate, check live weather, and compare exchange rates.</h2>
+            <p class="welcome-copy">Ask naturally. I’ll use the right tool and show exactly what happened.</p>
+            <div class="prompt-grid">
+              <button class="prompt-card" data-prompt="What is 24 multiplied by 18?">
+                <span class="prompt-icon coral">÷</span>
+                <span><strong>Calculate</strong><small>24 × 18</small></span>
+                <span class="prompt-arrow">↗</span>
+              </button>
+              <button class="prompt-card" data-prompt="What is the current weather in London?">
+                <span class="prompt-icon blue">◉</span>
+                <span><strong>Check weather</strong><small>London, United Kingdom</small></span>
+                <span class="prompt-arrow">↗</span>
+              </button>
+              <button class="prompt-card" data-prompt="Convert 100 USD to EUR">
+                <span class="prompt-icon green">↔</span>
+                <span><strong>Exchange rate</strong><small>USD → EUR</small></span>
+                <span class="prompt-arrow">↗</span>
+              </button>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <div class="composer-wrap">
+        <form class="composer" id="chatForm">
+          <textarea id="messageInput" rows="1" maxlength="1200" placeholder="Ask Orbit anything..." aria-label="Message"></textarea>
+          <div class="composer-actions">
+            <span class="model-label"><i></i> Gemini 2.5 Flash</span>
+            <button class="send-button" id="sendButton" type="submit" aria-label="Send message">↑</button>
+          </div>
+        </form>
+        <p class="disclaimer">Orbit can make mistakes. Verify important information.</p>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="settings-dialog" id="settingsDialog">
+    <form method="dialog" class="dialog-card" id="settingsForm">
+      <div class="dialog-head">
+        <div><p class="eyebrow">Connection</p><h3>API settings</h3></div>
+        <button class="close-button" value="cancel" aria-label="Close">×</button>
+      </div>
+      <label for="apiKey">Gemini API key</label>
+      <input type="password" id="apiKey" placeholder="AIza..." autocomplete="off">
+      <p>Your key is stored only in this browser session.</p>
+      <button class="save-button" value="save" type="submit">Save connection</button>
+    </form>
+  </dialog>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
